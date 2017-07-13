@@ -6,7 +6,7 @@ package syaiful.finalpro.englishcourse.config;
 
 public class Config {
 
-    public static final String SERVER_API = "http://192.168.43.203/APIs/";
+    public static final String SERVER_API = "http://x.x.x.x/APIs/";
     public static final String URL_SUBJECT = Config.SERVER_API + "Test.php";
     public static final String URL_GET_SUBJECT = Config.SERVER_API + "getTest.php?id=";
     public static final String URL_GET_CONTENT = Config.SERVER_API + "content.php?id=";
@@ -18,7 +18,7 @@ public class Config {
     //public static final String TAG_IMAGE   = "image";
 
     //Fix Configuration APIs
-    public static final String SERVER_APIs      = "http://192.168.43.203/EnglishAPIs/";
+    public static final String SERVER_APIs      = "http://x.x.x.x/EnglishAPIs/";
     public static final String URL_LISTCOURSE   = Config.SERVER_APIs + "Listcourse.php";
     public static final String URL_LISTCONTENT  = Config.SERVER_APIs + "Listcontent.php?id_ct=";
     public static final String IMAGE            = Config.SERVER_APIs + "image/";
