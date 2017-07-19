@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import syaiful.finalpro.englishcourse.fragments.ListCourseFragments;
-import syaiful.finalpro.englishcourse.fragments0.ListContentFragment;
+import syaiful.finalpro.englishcourse.fragments.ListTenseFragment;
 import syaiful.finalpro.englishcourse.fragments0.TileContentFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewpager(ViewPager viewPager){
 
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new TileContentFragment(), "Tense");
         adapter.addFragment(new ListCourseFragments(), "Course");
+        adapter.addFragment(new ListTenseFragment(), "Tense");
         viewPager.setAdapter(adapter);
 
     }
