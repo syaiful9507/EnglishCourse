@@ -1,5 +1,6 @@
 package syaiful.finalpro.englishcourse.fragments;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ import syaiful.finalpro.englishcourse.R;
 import syaiful.finalpro.englishcourse.adapter.AdapterTenses;
 import syaiful.finalpro.englishcourse.config.Config;
 import syaiful.finalpro.englishcourse.custom.CustomItemClickListener;
+import syaiful.finalpro.englishcourse.ui.CourseDetail;
+import syaiful.finalpro.englishcourse.ui.TenseDetail;
 
 public class ListTenseFragment extends Fragment implements CustomItemClickListener {
     private RecyclerView recyclerview;
@@ -111,7 +114,13 @@ public class ListTenseFragment extends Fragment implements CustomItemClickListen
 
 
         @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(View view, int position) {HashMap<String , String > list = list_data.get(position);
+
+            Intent in = new Intent(getActivity(), TenseDetail.class);
+            in.putExtra(config.TAG_ID_CATEGORY, list.get(config.TAG_ID_CATEGORY));
+            startActivity(in);
+
+
 
     }
 }

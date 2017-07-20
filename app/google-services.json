@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "679838234001",
+    "firebase_url": "https://final-project-bf739.firebaseio.com",
+    "project_id": "final-project-bf739",
+    "storage_bucket": "final-project-bf739.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679838234001:android:1f7ab6026d2c1bd4",
+        "android_client_info": {
+          "package_name": "syaiful.finalpro.englishcourse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679838234001-4p5qqvnb52mmi1da2ukgvgvbshmkmbmk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "syaiful.finalpro.englishcourse",
+            "certificate_hash": "9dff77aa13da05970f7211072d064068d696e312"
+          }
+        },
+        {
+          "client_id": "679838234001-n672hatfoh81jmc1qo1dom6kt5p2gbq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeEw3Q9HTQ-qbO7v2UkNHhl5krpgirfM8"
+        },
+        {
+          "current_key": "AIzaSyClF8YRVjMlD9ct3inEF19wa7F3qJHdi6U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679838234001-n672hatfoh81jmc1qo1dom6kt5p2gbq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
