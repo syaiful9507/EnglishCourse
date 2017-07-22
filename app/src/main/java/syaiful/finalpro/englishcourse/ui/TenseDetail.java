@@ -42,6 +42,7 @@ public class TenseDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tense_detail);
         Intent intent = getIntent();
+
         txtTitle    = (TextView) findViewById(R.id.title);
         txtid       = (TextView) findViewById(R.id.id);
         txtContent  = (TextView) findViewById(R.id.txtContent);
