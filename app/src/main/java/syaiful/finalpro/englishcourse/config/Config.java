@@ -17,7 +17,7 @@ public class Config {
     //public static final String TAG_CONTENT = "content";
     //public static final String TAG_IMAGE   = "image";
 
-    //Fix Configuration APIs
+    //Fix Configuration APIs ...
     public static final String SERVER_APIs      = "http://200.200.200.232/EnglishAPIs/";
     public static final String URL_LISTCOURSE   = Config.SERVER_APIs + "Listcourse.php";
     public static final String URL_LISTTENSE    = Config.SERVER_APIs + "ListTense.php";
