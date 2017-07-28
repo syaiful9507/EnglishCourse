@@ -6,9 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
 
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="2dp"
-    app:cardElevation="2dp">
+    app:cardBackgroundColor="@android:color/holo_orange_dark"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
 
     <!-- Les CardView possèdent des attributs supplémentaires dont
          - cardBackgroundColor
@@ -25,36 +25,48 @@
          pour avoir une organisation verticale nous devons
          donc rajouter un LinearLayout -->
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image"
-            android:layout_width="100dp"
-            android:layout_height="70dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/enlish"
-            />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/tvtitleformula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
-                tools:text="Sumenep"
+                tools:text="title"
+                android:textStyle="bold"
                 android:fontFamily="sans-serif"
+                android:textColor="#000"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:id="@+id/tvsub1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                tools:text="Sub 1"
+                android:fontFamily="sans-serif-smallcaps"
                 android:textColor="#000"
                 android:textSize="12sp"
                 />
             <TextView
-                android:id="@+id/text2"
+                android:id="@+id/tvsub2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="5dp"
-                android:layout_marginLeft="5dp"
-                tools:text="Sumenep"
-                android:fontFamily="sans-serif"
+                tools:text="Sub 2"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textColor="#000"
+                android:textSize="12sp"
+                />
+            <TextView
+                android:id="@+id/tvsub3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                tools:text="Sub 3"
+                android:fontFamily="sans-serif-smallcaps"
                 android:textColor="#000"
                 android:textSize="12sp"
                 />

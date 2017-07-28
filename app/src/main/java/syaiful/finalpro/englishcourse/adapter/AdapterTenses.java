@@ -51,11 +51,9 @@ public class AdapterTenses extends RecyclerView.Adapter<AdapterTenses.ViewHolder
     public void onBindViewHolder(AdapterTenses.ViewHolder holder, int position) {
 
         holder.textView.setText(list_data.get(position).get(config.TAG_TITLE));
-        list_data.get(position).get(config.TAG_IMAGE);
-
         Glide.with(context)
                 .load(config.IMAGE + list_data.get(position).get(config.TAG_IMAGE))
-                .placeholder(R.mipmap.ic_cloud)
+                .placeholder(R.drawable.enlish)
                 .into(holder.imageView);
 
     }
@@ -72,7 +70,8 @@ public class AdapterTenses extends RecyclerView.Adapter<AdapterTenses.ViewHolder
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView textView;
+        TextView textView, tex;
+
         ImageView imageView;
 
         public ViewHolder(View itemView) {

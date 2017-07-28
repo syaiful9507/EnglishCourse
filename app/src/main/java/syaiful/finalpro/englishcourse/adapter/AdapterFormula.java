@@ -5,55 +5,55 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import syaiful.finalpro.englishcourse.R;
 import syaiful.finalpro.englishcourse.config.Config;
 import syaiful.finalpro.englishcourse.custom.CustomItemClickListener;
 
 /**
- * Created by syaiful9508 on 04/07/17.
+ * Created by syaiful9508 on 28/07/17.
  */
 
-public class AdapterList extends RecyclerView.Adapter<AdapterList.ViewHolder>{
+public class AdapterFormula extends RecyclerView.Adapter<AdapterFormula.ViewHolder> {
+
     Context context;
     ArrayList<HashMap<String, String>> list_data;
+
     CustomItemClickListener listener;
     private Config config = new Config();
 
-    public AdapterList(Context context, ArrayList<HashMap<String , String >> list_data) {
+
+    public AdapterFormula(Context context, ArrayList<HashMap<String , String >> list_data) {
         this.context = context;
         this.list_data = list_data;
 
     }
 
     @Override
-    public AdapterList.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_card, parent, false);
+    public AdapterFormula.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_formula, parent, false);
         //AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         //07-07-2017
-        final ViewHolder mViewHolder = new ViewHolder(view);
+        final AdapterFormula.ViewHolder mViewHolder = new AdapterFormula.ViewHolder(view);
 
         //07-07-2017
-        return new ViewHolder(view);
+        return new AdapterFormula.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AdapterList.ViewHolder holder, final int position) {
-        holder.textView.setText(list_data.get(position).get(config.TAG_TITLE));
-        list_data.get(position).get(config.TAG_IMAGE);
+    public void onBindViewHolder(AdapterFormula.ViewHolder holder, int position) {
 
-        Glide.with(context)
-                .load(config.IMAGE + list_data.get(position).get(config.TAG_IMAGE))
-                .placeholder(R.mipmap.ic_cloud)
-                .into(holder.imageView);
+        holder.tvtitle.setText(list_data.get(position).get(config.TAG_TITLE_FRM));
+        holder.sub1.setText(list_data.get(position).get(config.TAG_SUB1));
+        holder.sub2.setText(list_data.get(position).get(config.TAG_SUB2));
+        holder.sub3.setText(list_data.get(position).get(config.TAG_SUB3));
+
+
+
+
 
     }
 
@@ -62,6 +62,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ViewHolder>{
         return list_data.size();
     }
 
+    //custom onitemclick
     public void setClickListener(CustomItemClickListener itemClickListener) {
         this.listener = itemClickListener;
     }
@@ -70,15 +71,14 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ViewHolder>{
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView textView;
-        ImageView imageView;
+        TextView tvtitle,sub1,sub2,sub3;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            textView = (TextView) itemView.findViewById(R.id.text);
-            imageView = (ImageView) itemView.findViewById(R.id.image);
-
+            tvtitle = (TextView) itemView.findViewById(R.id.tvtitleformula);
+            sub1    = (TextView) itemView.findViewById(R.id.tvsub1);
+            sub2    = (TextView) itemView.findViewById(R.id.tvsub2);
+            sub3    = (TextView) itemView.findViewById(R.id.tvsub3);
             itemView.setOnClickListener(this);
         }
 
@@ -96,5 +96,4 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ViewHolder>{
 
         //END OF CLASS VIEWHOLDER
     }
-
 }

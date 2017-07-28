@@ -1,7 +1,6 @@
 package syaiful.finalpro.englishcourse.ui;
 
 import android.content.Intent;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,38 +28,35 @@ import java.util.HashMap;
 
 import syaiful.finalpro.englishcourse.R;
 import syaiful.finalpro.englishcourse.adapter.AdapterDetailCourse;
+import syaiful.finalpro.englishcourse.adapter.AdapterFormula;
 import syaiful.finalpro.englishcourse.config.Config;
 import syaiful.finalpro.englishcourse.fragments.ListCourseFragments;
 
-public class CourseDetail extends AppCompatActivity {
+public class Formula extends AppCompatActivity {
 
     private RecyclerView recyclerview;
     private Toolbar toolbar;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-
     //volley
     private com.android.volley.RequestQueue requestQueue;
     private StringRequest stringRequest;
-
     ArrayList<HashMap<String, String>> list_data;
     private Config config = new Config();
-    ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_detail);
+        setContentView(R.layout.activity_formula);
 
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.maincollapsing);
-        imageView = (ImageView) findViewById(R.id.backdrop);
         //setting layout recycler
         recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerview.setLayoutManager(llm);
+
+        GETDATA();
+
         setSupportActionBar(toolbar);
-        getdata();
         //action bar back press
         ActionBar actionBar = getSupportActionBar();
         if (actionBar !=null){
@@ -71,49 +67,44 @@ public class CourseDetail extends AppCompatActivity {
 
     }
 
-    public void getdata(){
+    public void GETDATA(){
         Intent in = getIntent();
         String id = in.getStringExtra(config.TAG_ID_CATEGORY);
 
         requestQueue    = Volley.newRequestQueue(getApplicationContext());
         list_data   = new ArrayList<HashMap<String, String>>();
-        stringRequest   = new StringRequest(Request.Method.GET, config.URL_LISTCONTENT + id, new Response.Listener<String>() {
+        stringRequest   = new StringRequest(Request.Method.GET, config.URL_FORMULA + id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response: ", response);
-                String title = null, image = null;
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     //JSONArray jsonArray = jsonObject.getJSONArray(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("content");
                     for (int a = 0; a < jsonArray.length(); a++) {
-                        String content = "";
-                        String subtitle = "";
-                        title = "";
-                        image = "";
+
+
+                        //add new lines
+                        String title="", sub1="",sub2="",sub3="";
                         //JSONObject json = jsonArray.getJSONObject(a);
                         JSONObject json = jsonArray.getJSONObject(a);
-                        content = json.getString(config.TAG_CONTENT);
-                        subtitle = json.getString(config.TAG_SUBTITLE);
-                        title = json.getString(config.TAG_TITLE);
-                        image = json.getString(config.TAG_IMAGE);
+                        title = json.getString(config.TAG_TITLE_FRM);
+                        sub1 = json.getString(config.TAG_SUB1);
+                        sub2 = json.getString(config.TAG_SUB2);
+                        sub3 = json.getString(config.TAG_SUB3);
                         HashMap<String, String> map = new HashMap<String, String>();
-                        map.put(config.TAG_SUBTITLE, subtitle);
-                        map.put(config.TAG_CONTENT, content);
+                        map.put(config.TAG_TITLE_FRM, title);
+                        map.put(config.TAG_SUB1, sub1);
+                        map.put(config.TAG_SUB2, sub2);
+                        map.put(config.TAG_SUB3, sub3);
                         list_data.add(map);
-                        AdapterDetailCourse adapter = new AdapterDetailCourse(getApplicationContext(), list_data);
+                        AdapterFormula adapter = new AdapterFormula(getApplicationContext(), list_data);
                         recyclerview.setAdapter(adapter);
                         //adapter.setClickListener(CourseDetail.this);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-                collapsingToolbarLayout.setTitle(title);
-                Glide.with(getApplicationContext())
-                        .load(Config.IMAGE + image)
-                        .placeholder(R.mipmap.ic_cloud)
-                        .into(imageView);
 
             }
         }, new Response.ErrorListener() {
@@ -129,15 +120,13 @@ public class CourseDetail extends AppCompatActivity {
 
     }
 
-
     //back press methode
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == android.R.id.home){
-            navigateUpTo(new Intent(this, ListCourseFragments.class));
+            navigateUpTo(new Intent(this, TenseDetail.class));
             return  true;
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

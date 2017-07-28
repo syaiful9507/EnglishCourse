@@ -1,19 +1,12 @@
 package syaiful.finalpro.englishcourse.adapter;
-
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import syaiful.finalpro.englishcourse.R;
 import syaiful.finalpro.englishcourse.config.Config;
 import syaiful.finalpro.englishcourse.custom.CustomItemClickListener;
@@ -22,7 +15,7 @@ import syaiful.finalpro.englishcourse.custom.CustomItemClickListener;
  * Created by syaiful9508 on 23/07/17.
  */
 
-public class AdapterContent extends RecyclerView.Adapter<AdapterContent.ViewHolder>{
+public class AdapterDetailCourse extends RecyclerView.Adapter<AdapterDetailCourse.ViewHolder>{
 
 
     Context context;
@@ -32,29 +25,29 @@ public class AdapterContent extends RecyclerView.Adapter<AdapterContent.ViewHold
     private Config config = new Config();
 
 
-    public AdapterContent(Context context, ArrayList<HashMap<String , String >> list_data) {
+    public AdapterDetailCourse(Context context, ArrayList<HashMap<String , String >> list_data) {
         this.context = context;
         this.list_data = list_data;
 
     }
     @Override
-    public AdapterContent.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_content, parent, false);
+    public AdapterDetailCourse.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_contentcourse, parent, false);
         //AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         //07-07-2017
-        final AdapterContent.ViewHolder mViewHolder = new AdapterContent.ViewHolder(view);
+        final AdapterDetailCourse.ViewHolder mViewHolder = new AdapterDetailCourse.ViewHolder(view);
 
         //07-07-2017
-        return new AdapterContent.ViewHolder(view);
+        return new AdapterDetailCourse.ViewHolder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(AdapterContent.ViewHolder holder, int position) {
+    public void onBindViewHolder(AdapterDetailCourse.ViewHolder holder, int position) {
 
 
-        holder.title.setText(list_data.get(position).get(config.TAG_TITLE));
+        holder.title.setText(list_data.get(position).get(config.TAG_SUBTITLE));
         holder.content.setText(list_data.get(position).get(config.TAG_CONTENT));
 
 

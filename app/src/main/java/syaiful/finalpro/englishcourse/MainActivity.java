@@ -27,7 +27,6 @@ import syaiful.finalpro.englishcourse.chat.ui.activities.SplashActivity;
 import syaiful.finalpro.englishcourse.chat.ui.activities.UserListingActivity;
 import syaiful.finalpro.englishcourse.fragments.ListCourseFragments;
 import syaiful.finalpro.englishcourse.fragments.ListTenseFragment;
-import syaiful.finalpro.englishcourse.fragments0.TileContentFragment;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imgchat;

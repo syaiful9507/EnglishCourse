@@ -3,15 +3,21 @@ package syaiful.finalpro.englishcourse.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -23,34 +29,42 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import syaiful.finalpro.englishcourse.R;
+import syaiful.finalpro.englishcourse.adapter.AdapterDetailCourse;
 import syaiful.finalpro.englishcourse.config.Config;
 import syaiful.finalpro.englishcourse.fragments.ListCourseFragments;
 
 public class TenseDetail extends AppCompatActivity {
-
-    TextView txtid, txtTitle, txtContent;
-    ImageView viewimage;
-    Context context;
-    public String id_,textimage;
+    private RecyclerView recyclerview;
     private Toolbar toolbar;
-    int backgroundImage = R.drawable.ic_sync;
     private CollapsingToolbarLayout collapsingToolbarLayout;
+
+    //volley
+    private com.android.volley.RequestQueue requestQueue;
+    private StringRequest stringRequest;
+
+    ArrayList<HashMap<String, String>> list_data;
+    private Config config = new Config();
+    ImageView imageView;
+    FloatingActionButton FormulaFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tense_detail);
-        Intent intent = getIntent();
 
-        txtTitle    = (TextView) findViewById(R.id.title);
-        txtid       = (TextView) findViewById(R.id.id);
-        txtContent  = (TextView) findViewById(R.id.txtContent);
-        viewimage   = (ImageView) findViewById(R.id.backdrop);
+        FormulaFAB  = (FloatingActionButton) findViewById(R.id.formulaFAB);
+        imageView   = (ImageView) findViewById(R.id.backdrop);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.maincollapsing);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        txtid.setText(intent.getStringExtra(Config.TAG_ID_CATEGORY));
-        id_ = txtid.getText().toString();
+        //setting layout recycler
+        recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerview.setLayoutManager(llm);
         GETDATA();
 
         setSupportActionBar(toolbar);
@@ -59,47 +73,76 @@ public class TenseDetail extends AppCompatActivity {
         if (actionBar !=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        FormulaFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = getIntent();
+                String id = in.getStringExtra(config.TAG_ID_CATEGORY);
+                Intent intent = new Intent(getApplicationContext(), Formula.class);
+                intent.putExtra(config.TAG_ID_CATEGORY, id);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
-    private void GETDATA(){
-        String url = Config.URL_DETAIL_TENSE+ txtid.getText().toString().trim();
-        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+    public void GETDATA(){
+        Intent in = getIntent();
+        String id = in.getStringExtra(config.TAG_ID_CATEGORY);
+
+        requestQueue    = Volley.newRequestQueue(getApplicationContext());
+        list_data   = new ArrayList<HashMap<String, String>>();
+        stringRequest   = new StringRequest(Request.Method.GET, config.URL_DETAIL_TENSE + id, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                showJSON(response);
+                Log.d("Response: ", response);
+                String title = null, image = null;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    //JSONArray jsonArray = jsonObject.getJSONArray(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("content");
+                    for (int a = 0; a < jsonArray.length(); a++) {
+                        String content = "";
+                        String subtitle = "";
+                        title = "";
+                        image = "";
+                        //JSONObject json = jsonArray.getJSONObject(a);
+                        JSONObject json = jsonArray.getJSONObject(a);
+                        content = json.getString(config.TAG_CONTENT);
+                        subtitle = json.getString(config.TAG_SUBTITLE);
+                        title = json.getString(config.TAG_TITLE);
+                        image = json.getString(config.TAG_IMAGE);
+                        HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(config.TAG_SUBTITLE, subtitle);
+                        map.put(config.TAG_CONTENT, content);
+                        list_data.add(map);
+                        AdapterDetailCourse adapter = new AdapterDetailCourse(getApplicationContext(), list_data);
+                        recyclerview.setAdapter(adapter);
+                        //adapter.setClickListener(CourseDetail.this);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                collapsingToolbarLayout.setTitle(title);
+                Glide.with(getApplicationContext())
+                        .load(Config.IMAGE + image)
+                        .placeholder(R.drawable.enlish)
+                        .into(imageView);
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(TenseDetail.this, error.getMessage().toString(), Toast.LENGTH_SHORT ).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
         requestQueue.add(stringRequest);
-    }
 
-    private void showJSON(String response){
-        String title ="", content = "", image="";
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            JSONArray result = jsonObject.getJSONArray("content");
-            JSONObject collegeData = result.getJSONObject(0);
-            title = collegeData.getString(Config.TAG_TITLE);
-            content = collegeData.getString(Config.TAG_CONTENT);
-            image   = collegeData.getString(Config.TAG_IMAGE);
-
-        } catch (JSONException e){
-            e.printStackTrace();
-        }
-        txtContent.setText(content);
-        txtTitle.setText(title);
-        collapsingToolbarLayout.setTitle(title);
-
-        Glide.with(getApplicationContext())
-                .load(Config.IMAGE + image)
-                .placeholder(R.mipmap.ic_cloud)
-                .into(viewimage);
 
     }
 
