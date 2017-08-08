@@ -15,10 +15,12 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
+            android:background="@drawable/titlebg"
             android:text="title"
+            android:textSize="20dp"
+            android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/spacing_large"
             android:layout_marginTop="1dp"
             android:padding="5dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>

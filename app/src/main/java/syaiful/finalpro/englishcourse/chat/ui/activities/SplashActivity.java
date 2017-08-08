@@ -1,5 +1,6 @@
 package syaiful.finalpro.englishcourse.chat.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
                 // check if user is already logged in or not
                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                     // if logged in redirect the user to user listing activity
-                    MainActivity.startActivity(SplashActivity.this);
+                    MainActivity.startActivity(SplashActivity.this, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 } else {
                     // otherwise redirect the user to login activity
                     LoginActivity.startIntent(SplashActivity.this);

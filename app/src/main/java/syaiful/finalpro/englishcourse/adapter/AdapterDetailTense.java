@@ -1,6 +1,7 @@
 package syaiful.finalpro.englishcourse.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,7 @@ public class AdapterDetailTense extends RecyclerView.Adapter<AdapterDetailTense.
 
     @Override
     public AdapterDetailTense.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_contentcourse, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_contenttense, parent, false);
         //AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
         //07-07-2017
@@ -70,6 +71,10 @@ public class AdapterDetailTense extends RecyclerView.Adapter<AdapterDetailTense.
 
             title   = (TextView) itemView.findViewById(R.id.title);
             content = (TextView) itemView.findViewById(R.id.txtContent);
+            Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Bold.ttf");
+            title.setTypeface(typeface);
+            Typeface contentt = Typeface.createFromAsset(context.getAssets(), "fonts/SFCartoonistHand.ttf");
+            content.setTypeface(contentt);
 
             itemView.setOnClickListener(this);
         }

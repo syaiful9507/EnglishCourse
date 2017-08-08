@@ -1,6 +1,8 @@
 package syaiful.finalpro.englishcourse.ui;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,9 +33,10 @@ import syaiful.finalpro.englishcourse.R;
 import syaiful.finalpro.englishcourse.adapter.AdapterDetailCourse;
 import syaiful.finalpro.englishcourse.adapter.AdapterFormula;
 import syaiful.finalpro.englishcourse.config.Config;
+import syaiful.finalpro.englishcourse.custom.CustomItemClickListener;
 import syaiful.finalpro.englishcourse.fragments.ListCourseFragments;
 
-public class Formula extends AppCompatActivity {
+public class Formula extends AppCompatActivity  implements CustomItemClickListener{
 
     private RecyclerView recyclerview;
     private Toolbar toolbar;
@@ -45,23 +49,35 @@ public class Formula extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formula);
-
-        //setting layout recycler
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         recyclerview = (RecyclerView) findViewById(R.id.recyclerView);
-        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerview.setLayoutManager(llm);
-
-        GETDATA();
-
         setSupportActionBar(toolbar);
         //action bar back press
         ActionBar actionBar = getSupportActionBar();
         if (actionBar !=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Klik Rumus jika ingin melihat contoh", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        //setting layout recycler
+
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerview.setLayoutManager(llm);
+
+        GETDATA();
+
+
 
 
 
@@ -85,14 +101,16 @@ public class Formula extends AppCompatActivity {
 
 
                         //add new lines
-                        String title="", sub1="",sub2="",sub3="";
+                        String id="",title="", sub1="",sub2="",sub3="";
                         //JSONObject json = jsonArray.getJSONObject(a);
                         JSONObject json = jsonArray.getJSONObject(a);
+                        id  = json.getString(config.TAG_ID_FRM);
                         title = json.getString(config.TAG_TITLE_FRM);
                         sub1 = json.getString(config.TAG_SUB1);
                         sub2 = json.getString(config.TAG_SUB2);
                         sub3 = json.getString(config.TAG_SUB3);
                         HashMap<String, String> map = new HashMap<String, String>();
+                        map.put(config.TAG_ID_FRM, id);
                         map.put(config.TAG_TITLE_FRM, title);
                         map.put(config.TAG_SUB1, sub1);
                         map.put(config.TAG_SUB2, sub2);
@@ -100,7 +118,7 @@ public class Formula extends AppCompatActivity {
                         list_data.add(map);
                         AdapterFormula adapter = new AdapterFormula(getApplicationContext(), list_data);
                         recyclerview.setAdapter(adapter);
-                        //adapter.setClickListener(CourseDetail.this);
+                        adapter.setClickListener(Formula.this);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -124,9 +142,21 @@ public class Formula extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if (id == android.R.id.home){
-            navigateUpTo(new Intent(this, TenseDetail.class));
+            finish();
             return  true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
+        HashMap<String , String > list = list_data.get(position);
+
+        Intent in = new Intent(getApplicationContext(), Example.class);
+        in.putExtra(config.TAG_ID_FRM, list.get(config.TAG_ID_FRM));
+        startActivity(in);
+
+
     }
 }

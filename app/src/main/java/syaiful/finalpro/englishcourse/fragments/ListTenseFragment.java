@@ -114,7 +114,8 @@ public class ListTenseFragment extends Fragment implements CustomItemClickListen
 
 
         @Override
-    public void onItemClick(View view, int position) {HashMap<String , String > list = list_data.get(position);
+    public void onItemClick(View view, int position) {
+            HashMap<String , String > list = list_data.get(position);
 
             Intent in = new Intent(getActivity(), TenseDetail.class);
             in.putExtra(config.TAG_ID_CATEGORY, list.get(config.TAG_ID_CATEGORY));

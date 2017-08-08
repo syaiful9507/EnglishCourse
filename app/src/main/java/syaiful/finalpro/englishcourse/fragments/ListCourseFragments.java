@@ -84,9 +84,6 @@ public class ListCourseFragments extends Fragment implements CustomItemClickList
                         map.put(config.TAG_TITLE, title);
                         map.put(config.TAG_IMAGE, image);
 
-                        /*map.put("id", json.getString("id"));
-                        map.put("subjects", json.getString("subjects"));
-                        map.put("content", json.getString("content"));*/
 
                         list_data.add(map);
                         AdapterList adapter = new AdapterList(getActivity(), list_data);
@@ -115,8 +112,6 @@ public class ListCourseFragments extends Fragment implements CustomItemClickList
         HashMap<String , String > list = list_data.get(position);
         Intent in = new Intent(getActivity(), CourseDetail.class);
         in.putExtra(config.TAG_ID_CATEGORY, list.get(config.TAG_ID_CATEGORY));
-        in.putExtra(config.TAG_TITLE, list.get(config.TAG_TITLE));
-        in.putExtra(config.TAG_IMAGE, list.get(config.TAG_IMAGE));
         startActivity(in);
 
     }

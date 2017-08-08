@@ -1,6 +1,7 @@
 package syaiful.finalpro.englishcourse.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.ViewHolder>{
 
             textView = (TextView) itemView.findViewById(R.id.text);
             imageView = (ImageView) itemView.findViewById(R.id.image);
+            Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+            textView.setTypeface(typeface);
 
             itemView.setOnClickListener(this);
         }

@@ -25,6 +25,8 @@
     <string name="logout">Logout</string>
     <string name="are_you_sure">Are you sure ?</string>
     <string name="cancel">Cancel</string>
+    <string name="formula">Rumus</string>
+    <string name="example">Contoh</string>
     //properties login UI
 
     <string name="passowrd">Password</string>
@@ -43,6 +45,8 @@
     <string name="registered_emailid">Please enter your Registered Email Id below:</string>
     <string name="submit">SUBMIT</string>
     <string name="back">BACK</string>
+    <string name="title_activity_test">Test</string>
+    <string name="user">User</string>
     ///end of chat properties
 
 

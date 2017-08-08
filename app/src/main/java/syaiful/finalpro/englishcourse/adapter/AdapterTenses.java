@@ -1,6 +1,7 @@
 package syaiful.finalpro.englishcourse.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class AdapterTenses extends RecyclerView.Adapter<AdapterTenses.ViewHolder
     @Override
     public AdapterTenses.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_card_tenses, parent, false);
-        //AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+
 
         //07-07-2017
         final AdapterTenses.ViewHolder mViewHolder = new AdapterTenses.ViewHolder(view);
@@ -53,7 +54,7 @@ public class AdapterTenses extends RecyclerView.Adapter<AdapterTenses.ViewHolder
         holder.textView.setText(list_data.get(position).get(config.TAG_TITLE));
         Glide.with(context)
                 .load(config.IMAGE + list_data.get(position).get(config.TAG_IMAGE))
-                .placeholder(R.drawable.enlish)
+                .placeholder(R.drawable.tense)
                 .into(holder.imageView);
 
     }
@@ -79,6 +80,9 @@ public class AdapterTenses extends RecyclerView.Adapter<AdapterTenses.ViewHolder
 
             textView = (TextView) itemView.findViewById(R.id.text);
             imageView = (ImageView) itemView.findViewById(R.id.image);
+
+            Typeface title = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Light.ttf");
+            textView.setTypeface(title);
 
             itemView.setOnClickListener(this);
         }

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#009688</color>
     <color name="colorAccent">#FF4081</color>
     <color name="titlecolorbg">#9E9E9E</color>
+    <color name="transparent">#00000000</color>
 
     //chat properties
     <color name="red_50">#FFEBEE</color>

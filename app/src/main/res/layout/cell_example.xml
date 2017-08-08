@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvtitleexam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="8dp"
+                android:paddingTop="5dp"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="title" />
+
+
+                <TextView
+                    android:id="@+id/tvsubexample1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    tools:text="Sub 1" />
+
+                <TextView
+                    android:id="@+id/tvsubexample2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="5dp"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    tools:text="Sub 2"
+                    android:padding="5dp"/>
+
+        </LinearLayout>
+
+
+        <!-- android:background="?android:selectableItemBackground"-->
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
